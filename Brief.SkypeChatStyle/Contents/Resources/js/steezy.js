@@ -17,7 +17,7 @@ var add_img_tags = function(message){
 };
 
 var add_twitter_img_tags = function(message){
-	var the_match = message.match(/http:\/\/twitter\.com\/[^<>]+\/status(es)?)\/([0-9]+)/)
+	var the_match = message.match(/http:\/\/twitter\.com\/[^<>]+\/status(es)?\/([0-9]+)/)
 	if (the_match && the_match.length > 2)
 	  return '<br /><img src="http://twictur.es/i/' + the_match[2] + '.gif" />'
   else
