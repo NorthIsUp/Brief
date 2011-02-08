@@ -4,8 +4,9 @@ SCS.conv._nearBottom = function(){
 
 var oldAppendItem = SCS.conv.appendItem;
 SCS.conv.appendItem = function(html, scroll){
-  var matchHtml = html.replace(/<[^>]+>/g,' '),
+  var matchHtml = html.replace(/<[^>]+>/g,' ').replace(/#\!\//,''),
       urlMatch = matchHtml.match(/(https?|ftp|rmtp|mms):\/\/(([A-Z0-9][A-Z0-9_-]*)(\.[A-Z0-9][A-Z0-9_-]*)+)(:(\d+))?[\/\w\.-_]*/ig);
+
   if (urlMatch){
     var wrapper = new Element('div', {'html': html}),
         element = wrapper.getFirst(),
