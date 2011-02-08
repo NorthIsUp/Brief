@@ -2,136 +2,38 @@ SCS.conv._nearBottom = function(){
   return (document.body.scrollTop+window.innerHeight >= document.body.scrollHeight-75);
 };
 
-
-
-
-
-var add_img_tags = function(message){
-	var the_match = message.match(/([^"]http:\/\/[^<>]+\.(jpg|png|gif|jpeg))/gi)
-	if (the_match)
-	  return the_match.map(function(tm,i){
-			return '<br /><img src="'+ tm.slice(1) + '" />'
-		}).join('')
-  else
-    return ''
-};
-
-var add_twitter_img_tags = function(message){
-	var the_match = message.match(/http:\/\/twitter\.com\/[^<>]+\/status(es)?\/([0-9]+)/)
-	if (the_match && the_match.length > 2)
-	  return '<br /><img src="http://twictur.es/i/' + the_match[2] + '.gif" />'
-  else
-    return ''
-};
-
-var add_sad_trombone = function(message) {
-  var the_match = message.match(/sadtrombone|wah/)
-  if (the_match) {
-    var embed = ' '
-    embed += '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="244" height="152">'
-    embed += '<param name="movie" value="http://sadtrombone.com/sad_trombone.swf" />'
-    embed += '<param name="quality" value="high" />'
-    embed += '<param name="autoplay" value="true" />'
-    embed += '</object>'
-    return embed
-  } else {
-    return ''
-  }
-};
-	
-var add_haha = function(message) {
-  var the_match = message.match(/HAHA/)
-  if (the_match) {
-    var embed = ' '
-    embed += '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0" width="400" height="373">'
-    embed += '<param name="movie" value="http://crossgrain.info/haha/haha.swf" />'
-    embed += '<param name="quality" value="high" />'
-    embed += '<embed src="http://crossgrain.info/haha/haha.swf" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="400" height="373"></embed>'
-    embed += '</object>'
-    return embed
-  } else {
-    return ''
-  }
-};
-	
-var add_emoticons = function(message) {
-  var base = '<img src="http://l.yimg.com/us.yimg.com/i/mesg/emoticons7/'
-  var end = '" />'
-  var emoticonned = message
-	  .replace(/:'-?\(/g, base + '20.gif' + end)
-    .replace(/:-?\)/g, base + '1.gif' + end)
-    .replace(/:-?\(/g, base + '2.gif' + end)
-    .replace(/:-?D/g, base + '4.gif' + end)
-    .replace(/8-?\)/g, base + '16.gif' + end)
-    .replace(/\*facepalm\*/g, '<img src="http://img.skitch.com/20081020-kqf6ar41tdrwiqp2k6ejhr3q3t.jpg" alt="facepalm">')
-    .replace(/\dtmyk\d/ig, '<img src="http://img.skitch.com/20081202-mfnhnh9nursmcs2fb8smj6w94q.jpg" alt="tmyk">')
-    .replace(/the more you know/gi, '<img src="http://img.skitch.com/20081202-nr24rt47pu6d26y3qnmu994cha.jpg" alt="the more you know">')
-    .replace(/8=+(>|D)/g, '<img src="http://img.skitch.com/20080801-f2k6r13iaw7xsrya39ftamugaa.png" />')
-    .replace(/(DERP[!1]+)/g, '<img src="http://img.skitch.com/20080801-ehk4xc8n65xdx2sndc4scckyf2.jpg" alt="$1"/>')
-    .replace(/^\*?ba+r+f+s*\*?/g, '<img src="http://img.skitch.com/20080808-t8shmyktk66i65rx425jgrrwae.jpg" alt="Achewood - October 3, 2006"/>')
-    .replace(/do not want|\bdnw\b/gi, '<img src="http://img.skitch.com/20081031-1tt6dpsq42p85i2472xmc3yped.jpg" />')
-    .replace(/\bodb\b/gi, '<img src="http://img.skitch.com/20081211-gwjfs9q8gcqjdq3sn6w13bd4at.jpg" alt="oh baby I like it raw"/>')
-  return emoticonned
-};
-	
-var add_youtube_embeds = function(message){
-              var regex = /.*youtube\.com\/watch\?v=([a-zA-Z0-9\-]+).*?/;
-  var the_match = message.match(regex);
-  if (the_match) {
-    embed  = '<br />'
-    embed += '<object width="425" height="344">'
-    embed += '<param name="movie" value="http://www.youtube.com/v/' + the_match[1] + '&fs=1">'
-    embed += '</param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param>'
-    embed += '<embed src="http://www.youtube.com/v/' + the_match[1] + '&hl=en&fs=1" type="application/x-shockwave-flash" allowfullscreen="true" width="425" height="344"></embed>'
-    embed += '</object>'
-	  return embed
-  } else {
-    return ''
-  }
-};
-
-var add_vimeo_embeds = function(message) {
-  var the_match = message.match(/vimeo.com\/\d{1,}/)
-  if (the_match) {
-    var id = the_match.toString().split('/')[1]
-    embed = '<br />'
-    embed += '<object width="501" height="334">'
-    embed += '<param name="allowfullscreen" value="true" />'
-    embed += '<param name="allowscriptaccess" value="always" />'
-    embed += '<param name="movie" value="http://vimeo.com/moogaloop.swf?clip_id=' + id
-    embed += '&amp;server=vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=a60011&amp;fullscreen=1" />'
-    embed += '<embed src="http://vimeo.com/moogaloop.swf?clip_id=' + id
-    embed += '&amp;server=vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=a60011&amp;fullscreen=1" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" width="501" height="334"></embed></object>'
-    return embed
-  } else {
-    return ''
-  }
-};
-
-var add_gists = function(message) {
-  var the_match = message.match(/https?:\/\/gist\.github\.com\/\w{1,}/);
-  if (the_match) {
-    embed = "<br />"
-    embed += '<iframe width="100%" frameborder="0" src="' + the_match[0] + '.pibb" />'
-    return embed
-  } else {
-    return ''
-  }
-};
-
-
-
-
 var oldAppendItem = SCS.conv.appendItem;
 SCS.conv.appendItem = function(html, scroll){
-  var extras = add_img_tags(html) 
-             + add_twitter_img_tags(html) 
-             + add_youtube_embeds(html) 
-             + add_vimeo_embeds(html) 
-             + add_sad_trombone(html) 
-             + add_gists(html);
-             
-  html = html.replace(/(<div class="body">.+)(<\/div>)/, "$1" + extras + "$2");
+
+  var urlMatch = html.match(/(https?|ftp|rmtp|mms):\/\/(([A-Z0-9][A-Z0-9_-]*)(\.[A-Z0-9][A-Z0-9_-]*)+)(:(\d+))?[\/\w\.-_]*/i);
+  if (urlMatch){
+    var wrapper = new Element('div', {'html': html}),
+        element = wrapper.getFirst(),
+        elementBody = element.getElement('div.body'),
+        id = element.get('id'),
+        embedId = id + '-embed',
+        embedZone = new Element('div', {id: embedId, html: 'Loading...'});
+
+    elementBody.grab(embedZone);
+    html = wrapper.get('html');
+
+    new Request.JSONP({
+      url: 'http://api.embed.ly/1/oembed',
+      data: { 
+        url: urlMatch[0],
+        maxheight: 800,
+        maxwidth: 600
+      },
+      onComplete: function(data){
+        var elem = document.id(embedId);
+        if (elem.get('html').test(/Loading/)) elem.set('html','');
+        if (['video','rich'].contains(data.type))
+          elem.set('html', elem.get('html') + data.html);
+        else if (data.type == 'photo')
+          elem.set('html', elem.get('html') + '<img src="' + data.url + '">');
+      }
+    }).send();
+  }
 
   return oldAppendItem(html, scroll);
 };
