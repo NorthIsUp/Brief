@@ -12,7 +12,7 @@ SCS.conv.appendItem = function(html, scroll){
     
   if (scroll)
     elementBody.set('html', 
-      add_emoticons(elementBody.get('html')) + add_haha(elementBody.get('html')) + add_sad_trombone(elementBody.get('html'))
+      add_emoticons(elementBody.get('html')) + add_haha(elementBody.get('html')) + add_sad_trombone(elementBody.get('html')) + add_swiper(elementBody.get('html'))
     );
     
 
@@ -84,4 +84,17 @@ var add_emoticons = function(message) {
     .replace(/do not want|\bdnw\b/gi, '<br><img src="http://img.skitch.com/20081031-1tt6dpsq42p85i2472xmc3yped.jpg" />')
     .replace(/\bodb\b/gi, '<br><img src="http://img.skitch.com/20081211-gwjfs9q8gcqjdq3sn6w13bd4at.jpg" alt="oh baby I like it raw"/>')
   return emoticonned
+};
+
+var add_swiper = function(message) {
+  var the_match = message.match(/swiper:\ ((\w|\s){1,})/i);
+  if (the_match) {
+    var raw = the_match[1];
+    var term = raw.replace('image','').replace('img','').replace(/^\s+|\s+$/g,"");
+    var embed = '<br>';
+    embed += '<img style="max-width:500px;height:auto" src="http://floating-earth-914.heroku.com/image/' + term + '">';
+    return embed;
+  } else {
+    return '';
+  }
 };
