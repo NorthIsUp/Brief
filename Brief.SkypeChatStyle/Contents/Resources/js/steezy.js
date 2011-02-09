@@ -9,8 +9,12 @@ SCS.conv.appendItem = function(html, scroll){
       wrapper = new Element('div', {'html': html}),
       element = wrapper.getFirst(),
       elementBody = element.getElement('div.body');
-      
-  // elementBody.set('html', add_emoticons(elementBody.get('html')) + add_haha(elementBody.get('html')) + add_sad_trombone(elementBody.get('html')))
+    
+  if (scroll)
+    elementBody.set('html', 
+      add_emoticons(elementBody.get('html')) + add_haha(elementBody.get('html')) + add_sad_trombone(elementBody.get('html'))
+    );
+    
 
   if (urlMatch){
     var id = element.get('id'),
@@ -71,7 +75,7 @@ var add_emoticons = function(message) {
   var base = '<img src="http://l.yimg.com/us.yimg.com/i/mesg/emoticons7/'
   var end = '" />'
   var emoticonned = message
-    .replace(/\*facepalm\*/g, '<br><img src="http://img.skitch.com/20081020-kqf6ar41tdrwiqp2k6ejhr3q3t.jpg" alt="facepalm">')
+    .replace(/facepalm/g, '<br><img src="http://img.skitch.com/20081020-kqf6ar41tdrwiqp2k6ejhr3q3t.jpg" alt="facepalm">')
     .replace(/\dtmyk\d/ig, '<br><img src="http://img.skitch.com/20081202-mfnhnh9nursmcs2fb8smj6w94q.jpg" alt="tmyk">')
     .replace(/the more you know/gi, '<br><img src="http://img.skitch.com/20081202-nr24rt47pu6d26y3qnmu994cha.jpg" alt="the more you know">')
     .replace(/8=+(>|D)/g, '<br><img src="http://img.skitch.com/20080801-f2k6r13iaw7xsrya39ftamugaa.png" />')
@@ -81,10 +85,3 @@ var add_emoticons = function(message) {
     .replace(/\bodb\b/gi, '<br><img src="http://img.skitch.com/20081211-gwjfs9q8gcqjdq3sn6w13bd4at.jpg" alt="oh baby I like it raw"/>')
   return emoticonned
 };
-
-
-
-
-
-
-
