@@ -87,13 +87,11 @@ var add_emoticons = function(message) {
 };
 
 var add_swiper = function(message) {
-  var the_match = message.match(/swiper:\ ((\w|\s){1,})/i);
+  var the_match = message.match(/swiper: ((\w|\s)+)/i);
   if (the_match) {
-    var raw = the_match[1];
-    var term = raw.replace('image','').replace('img','').replace(/^\s+|\s+$/g,"");
-    var embed = '<br>';
-    embed += '<img style="max-width:500px;height:auto" src="http://floating-earth-914.heroku.com/image/' + term + '">';
-    return embed;
+    var raw = the_match[1],
+        term = raw.replace('image','').replace('img','').replace(/^\s+|\s+$/g,"");        
+    return '<br/><img style="max-width:500px;height:auto" src="http://floating-earth-914.heroku.com/image/' + term + '">';    
   } else {
     return '';
   }
