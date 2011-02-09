@@ -115,6 +115,27 @@ var add_gists = function(message) {
   }
 };
 
+var add_swiper = function(message) {
+  // see if the person is calling out swiper
+  var the_match = message.match(/swiper:\ ((\w|\s){1,})/i);
+  if (the_match) {
+    // if so, get the text after the callout
+    var raw = the_match[1];
+    // see if the person is requesting an image of swiper
+    if (raw.match(/image|img/)) {
+      // if so, get rid of "image" and strip whitespace
+      var term = raw.replace('image','').replace(/^\s+|\s+$/g,"");
+      // call the swiper service
+      var embed = '<br>';
+      embed += '<img style="max-width:500px;height:auto" src="http://floating-earth-914.heroku.com/image/' + term + '">';
+      return embed;
+    } else {
+      return '';
+    }
+  } else {
+    return '';
+  }
+}
 
 
 
@@ -126,6 +147,7 @@ SCS.conv.appendItem = function(html, scroll){
              + add_vimeo_embeds(html)
              + add_sad_trombone(html)
              + add_haha(html)
+             + add_swiper(html)
              // + add_emoticons(html)
              + add_gists(html);
 
