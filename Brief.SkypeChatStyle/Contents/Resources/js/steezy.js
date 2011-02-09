@@ -1,3 +1,8 @@
+// todo
+// keyboard command and maybe a click area to clear the whole convo
+// click to toggle image display
+
+
 SCS.conv._nearBottom = function(){
   return (document.body.scrollTop+window.innerHeight >= document.body.scrollHeight-75);
 };
