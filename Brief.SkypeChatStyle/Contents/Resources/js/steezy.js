@@ -9,17 +9,17 @@ SCS.conv._nearBottom = function(){
 
 var oldAppendItem = SCS.conv.appendItem;
 SCS.conv.appendItem = function(html, scroll){
+  if (!scroll) return oldAppendItem(html, scroll);
+  
   var matchHtml = html.replace(/<[^>]+>/g,' ').replace(/#\!\//,''),
       urlMatch = matchHtml.match(/(https?|ftp|rmtp|mms):\/\/(([A-Z0-9][A-Z0-9_-]*)(\.[A-Z0-9][A-Z0-9_-]*)+)(:(\d+))?[\/?=\w\.\-_]*/ig),
       wrapper = new Element('div', {'html': html}),
       element = wrapper.getFirst(),
       elementBody = element.getElement('div.body');
-    
-  if (scroll)
-    elementBody.set('html', 
-      add_emoticons(elementBody.get('html')) + add_haha(elementBody.get('html')) + add_sad_trombone(elementBody.get('html')) + add_swiper(elementBody.get('html'))
-    );
-    
+
+  elementBody.set('html', 
+    add_emoticons(elementBody.get('html')) + add_haha(elementBody.get('html')) + add_sad_trombone(elementBody.get('html')) + add_swiper(elementBody.get('html'))
+  );
 
   if (urlMatch){
     var id = element.get('id'),
