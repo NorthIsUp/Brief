@@ -101,3 +101,10 @@ var add_swiper = function(message) {
     return '';
   }
 };
+
+
+window.addEvent('domready', function(){
+  document.id('conversation').addEvent('click:relay(div.body img)', function(){
+    this.setStyle('display','none')
+  })
+})
