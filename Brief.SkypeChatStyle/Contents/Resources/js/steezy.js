@@ -95,8 +95,19 @@ var add_swiper = function(message) {
   var the_match = message.match(/swiper:\ (.*)/i);
   if (the_match) {
     var term = the_match[1].clean(),
-        embed = '<br>';
-    embed += '<img style="max-width:500px;height:auto" src="http://floating-earth-914.heroku.com/image/' + term + '">';
+        embed = '';
+
+    if (term.test('no swiping','i')) {
+      // Cookie.write('swiper','no swiping');
+      embed += '<br>awww maannnn!!';
+    } else if (term.test('start swiping','i')) {
+      // Cookie.dispose('swiper');
+      embed += '<br>swiper now swiping!';
+    // } else if (Cookie.read('swiper') === 'no swiping') {
+      // embed += '';
+    } else {
+      embed += '<br><img style="max-width:500px;height:auto" src="http://floating-earth-914.heroku.com/image/' + term + '">';
+    }
     return embed;
   } else {
     return '';
