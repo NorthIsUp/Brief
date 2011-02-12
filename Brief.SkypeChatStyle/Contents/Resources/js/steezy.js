@@ -10,14 +10,14 @@ SCS.conv._nearBottom = function(){
 var oldAppendItem = SCS.conv.appendItem;
 SCS.conv.appendItem = function(html, scroll){
   if (!scroll) return oldAppendItem(html, scroll);
-  
+
   var matchHtml = html.replace(/<[^>]+>/g,' ').replace(/#\!\//,''),
       urlMatch = matchHtml.match(/(https?|ftp|rmtp|mms):\/\/(([A-Z0-9][A-Z0-9_-]*)(\.[A-Z0-9][A-Z0-9_-]*)+)(:(\d+))?[\/?=\w\.\-_]*/ig),
       wrapper = new Element('div', {'html': html}),
       element = wrapper.getFirst(),
       elementBody = element.getElement('div.body');
 
-  elementBody.set('html', 
+  elementBody.set('html',
     add_emoticons(elementBody.get('html')) + add_haha(elementBody.get('html')) + add_sad_trombone(elementBody.get('html')) + add_swiper(elementBody.get('html'))
   );
 
@@ -25,13 +25,13 @@ SCS.conv.appendItem = function(html, scroll){
     var id = element.get('id'),
     embedId = id + '-embed',
     embedZone = new Element('div', {id: embedId, html: 'Loading...'});
-    
+
     elementBody.grab(embedZone);
-    
+
     urlMatch.each(function(url){
       new Request.JSONP({
         url: 'http://api.embed.ly/1/oembed',
-        data: { 
+        data: {
           url: url,
           maxheight: 800,
           maxwidth: 600
@@ -92,11 +92,11 @@ var add_emoticons = function(message) {
 };
 
 var add_swiper = function(message) {
-  var the_match = message.match(/swiper: ((\w|\s)+)/i);
+  var the_match = message.match(/swiper:\ (.*)/i);
   if (the_match) {
     var raw = the_match[1],
-        term = raw.replace('image','').replace('img','').replace(/^\s+|\s+$/g,"");        
-    return '<br/><img style="max-width:500px;height:auto" src="http://floating-earth-914.heroku.com/image/' + term + '">';    
+        term = raw.replace(/^\s+|\s+$/g,"");
+    return '<br/><img style="max-width:500px;height:auto" src="http://floating-earth-914.heroku.com/image/' + term + '">';
   } else {
     return '';
   }
