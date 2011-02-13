@@ -18,7 +18,7 @@ SCS.conv.appendItem = function(html, scroll){
       elementBody = element.getElement('div.body');
 
   elementBody.set('html',
-    add_emoticons(elementBody.get('html')) + add_haha(elementBody.get('html')) + add_sad_trombone(elementBody.get('html')) + add_swiper(elementBody.get('html'))
+    add_emoticons(elementBody.get('html')) + add_haha(elementBody.get('html')) + add_sad_trombone(elementBody.get('html')) + add_swiper(elementBody.get('html'), wrapper)
   );
 
   if (urlMatch){
@@ -91,22 +91,25 @@ var add_emoticons = function(message) {
   return emoticonned
 };
 
-var add_swiper = function(message) {
+SWIPER = {};
+
+var add_swiper = function(message, html) {
   var the_match = message.match(/swiper:\ (.*)/i);
   if (the_match) {
     var term = the_match[1].clean(),
+        sender = html.getElement('.sender').get('text').toLowerCase(),
         embed = '';
 
     if (term.test('no swiping','i')) {
-      // Cookie.write('swiper','no swiping');
+      SWIPER.swiping = 'no';
       embed += '<br>awww maannnn!!';
     } else if (term.test('start swiping','i')) {
-      // Cookie.dispose('swiper');
+      SWIPER.swiping = 'yes';
       embed += '<br>swiper now swiping!';
-    // } else if (Cookie.read('swiper') === 'no swiping') {
-      // embed += '';
+    } else if (SWIPER.swiping === 'no') {
+      embed += '';
     } else {
-      embed += '<br><img style="max-width:500px;height:auto" src="http://floating-earth-914.heroku.com/image/' + term + '">';
+      embed += '<br><img style="max-width:500px;height:auto" src="http://floating-earth-914.heroku.com/image/' + term + '?sender=' + sender + '">';
     }
     return embed;
   } else {
