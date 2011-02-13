@@ -91,7 +91,7 @@ var add_emoticons = function(message) {
   return emoticonned
 };
 
-SWIPER = {};
+SCS.swiper = 'yes';
 
 var add_swiper = function(message, html) {
   var the_match = message.match(/swiper:\ (.*)/i);
@@ -101,12 +101,12 @@ var add_swiper = function(message, html) {
         embed = '';
 
     if (term.test('no swiping','i')) {
-      SWIPER.swiping = 'no';
+      SCS.swiper = 'no';
       embed += '<br>awww maannnn!!';
     } else if (term.test('start swiping','i')) {
-      SWIPER.swiping = 'yes';
+      SCS.swiper = 'yes';
       embed += '<br>swiper now swiping!';
-    } else if (SWIPER.swiping === 'no') {
+    } else if (SCS.swiper === 'no') {
       embed += '';
     } else {
       embed += '<br><img style="max-width:500px;height:auto" src="http://floating-earth-914.heroku.com/image/' + term + '?sender=' + sender + '">';
