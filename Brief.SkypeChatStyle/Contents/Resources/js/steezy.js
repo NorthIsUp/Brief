@@ -98,15 +98,16 @@ var add_swiper = function(message, html) {
   if (the_match) {
     var term = the_match[1].clean(),
         sender = html.getElement('.sender').get('text').toLowerCase(),
-        embed = '';
+        embed = '',
+        current_user = html.getElement('.item').hasClass('out');
 
-    if (term.test('no swiping','i')) {
+    if (term.test('no swiping','i') && current_user) {
       SCS.swiper = 'no';
       embed += '<br>awww maannnn!!';
-    } else if (term.test('start swiping','i')) {
+    } else if (term.test('start swiping','i') && current_user) {
       SCS.swiper = 'yes';
       embed += '<br>swiper now swiping!';
-    } else if (SCS.swiper === 'no') {
+    } else if (SCS.swiper === 'no' && current_user) {
       embed += '';
     } else {
       embed += '<br><img style="max-width:500px;height:auto" src="http://floating-earth-914.heroku.com/image/' + term + '?sender=' + sender + '">';
