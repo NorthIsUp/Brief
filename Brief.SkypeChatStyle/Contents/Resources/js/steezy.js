@@ -107,10 +107,14 @@ var add_swiper = function(message, html) {
     } else if (term.test('start swiping','i') && current_user) {
       SCS.swiper = 'yes';
       embed += '<br>swiper now swiping!';
-    } else if (SCS.swiper === 'no' && current_user) {
-      embed += '';
+    } else if (SCS.swiper === 'no') {
+      embed += ': <a href="http://floating-earth-914.heroku.com/image/' + term + '">(view swiped image)</a>';
     } else {
-      embed += '<br><img style="max-width:500px;height:auto" src="http://floating-earth-914.heroku.com/image/' + term + '?sender=' + sender + '">';
+      if (term.test(/no swiping|start swiping/)) {
+        embed += '';
+      } else {
+        embed += '<br><img style="max-width:500px;height:auto" src="http://floating-earth-914.heroku.com/image/' + term + '?sender=' + sender + '">';
+      }
     }
     return embed;
   } else {
