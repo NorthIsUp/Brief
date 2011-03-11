@@ -54,7 +54,7 @@ var add_sad_trombone = function(message) {
   var the_match = message.match(/sadtrombone|wah|womp/)
   if (the_match) {
     var embed = ' '
-    embed += '<audio src="http://dl.dropbox.com/u/14572/steezy/Sad-Trombone.mp3" autoplay>'
+    embed += '<audio src="http://f.cl.ly/items/1n18283C2k0W1O0b080R/womp_womp.wav" autoplay>'
     embed += 'SAD TROMBONE PLAYING FOR YOU'
     embed += '</audio>'
     return embed
