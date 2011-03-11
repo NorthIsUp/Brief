@@ -18,7 +18,7 @@ SCS.conv.appendItem = function(html, scroll){
       elementBody = element.getElement('div.body');
 
   elementBody.set('html',
-    add_emoticons(elementBody.get('html')) + add_haha(elementBody.get('html')) + add_sad_trombone(elementBody.get('html')) + add_swiper(elementBody.get('html'), wrapper)
+    add_emoticons(elementBody.get('html')) + add_sad_trombone(elementBody.get('html')) + add_swiper(elementBody.get('html'), wrapper)
   );
 
   if (urlMatch){
@@ -63,18 +63,6 @@ var add_sad_trombone = function(message) {
   }
 };
 
-var add_haha = function(message) {
-  var the_match = message.match(/HAHA/)
-  if (the_match) {
-    var embed = ' '
-    embed += '<audio src="http://dl.dropbox.com/u/14572/steezy/haha.mp3" autoplay>'
-    embed += 'NELSON SAYING HAHA'
-    embed += '</audio>'
-    return embed
-  } else {
-    return ''
-  }
-};
 var add_emoticons = function(message) {
   var base = '<img src="http://l.yimg.com/us.yimg.com/i/mesg/emoticons7/'
   var end = '" />'
